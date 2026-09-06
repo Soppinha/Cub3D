@@ -1,12 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_putendl_fd.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: svaladar <svaladar@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: lcosta-a <lcosta-a@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/09/01 20:22:58 by svaladar          #+#    #+#             */
-/*   Updated: 2026/09/01 20:22:59 by svaladar         ###   ########.fr       */
+/*   Created: 2025/07/13 01:16:14 by lcosta-a          #+#    #+#             */
+/*   Updated: 2025/07/22 19:22:34 by lcosta-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "libft.h"
+
+void	ft_putendl_fd(char *s, int fd)
+{
+	char	newline;
+
+	newline = '\n';
+	if (!s)
+		return ;
+	ft_putstr_fd(s, fd);
+	write(fd, &newline, 1);
+}
