@@ -30,11 +30,13 @@ int	parse_config(char **lines, t_config *cfg)
 	i = 0;
 	while (lines[i] && is_blank(lines[i]))
 		i++;
-	while (lines[i] && !is_blank(lines[i]) && is_config_line(lines[i]))
+	while (lines[i] && is_config_line(lines[i]))
 	{
 		if (!parse_config_line(lines[i], cfg))
 			return (-1);
 		i++;
+		while (lines[i] && is_blank(lines[i]))
+			i++;
 	}
 	if (!cfg->tex_n || !cfg->tex_s || !cfg->tex_w || !cfg->tex_e
 		|| !cfg->f_set || !cfg->c_set)
