@@ -4,7 +4,7 @@ CFLAGS = -Wall -Wextra -Werror -Iincludes -Ilib/libft -Ilib/minilibx-linux
 
 LIBFT = lib/libft/libft.a
 MLX = lib/minilibx-linux/libmlx_Linux.a
-MLXFLAGS = -Llib/minilibx-linux -lmlx_Linux -lXext -lX11
+MLXFLAGS = -Llib/minilibx-linux -lmlx_Linux -lXext -lX11 -lm
 
 SRCS = main.c \
 	src/parser/parse_args.c src/parser/error.c src/parser/read_file.c \
@@ -12,7 +12,8 @@ SRCS = main.c \
 	src/parser/config_textures.c src/parser/config_color.c \
 	src/parser/map.c src/parser/map_charset.c \
 	src/parser/flood.c src/parser/flood_utils.c \
-	src/window/window.c src/hooks/hooks.c src/hooks/cleanup.c
+	src/window/window.c src/hooks/hooks.c src/hooks/keys.c \
+	src/hooks/move.c src/hooks/cleanup.c
 OBJ_DIR = obj
 OBJS = $(addprefix $(OBJ_DIR)/, $(SRCS:.c=.o))
 
