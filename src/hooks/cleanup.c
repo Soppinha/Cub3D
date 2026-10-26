@@ -12,10 +12,24 @@
 
 #include "cub3d.h"
 
+static void	free_textures(t_scene *scene)
+{
+	int	i;
+
+	i = 0;
+	while (i < 4)
+	{
+		if (scene->mlx.wall_tex[i].ptr)
+			mlx_destroy_image(scene->mlx.mlx, scene->mlx.wall_tex[i].ptr);
+		i++;
+	}
+}
+
 int	cleanup(t_scene *scene, int status)
 {
 	if (scene->mlx.img.ptr)
 		mlx_destroy_image(scene->mlx.mlx, scene->mlx.img.ptr);
+	free_textures(scene);
 	if (scene->mlx.win)
 		mlx_destroy_window(scene->mlx.mlx, scene->mlx.win);
 	if (scene->mlx.mlx)
