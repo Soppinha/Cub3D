@@ -13,8 +13,7 @@ SRCS = main.c \
 	src/parser/map.c src/parser/map_charset.c \
 	src/parser/flood.c src/parser/flood_utils.c \
 	src/window/window.c src/window/textures.c \
-	src/hooks/hooks.c src/hooks/cleanup.c src/hooks/timing.c \
-	src/game/player_init.c src/game/move.c src/game/move_player.c \
+	src/hooks/hooks.c src/hooks/keys.c src/hooks/move.c src/hooks/cleanup.c \
 	src/game/raycast.c src/game/raycast_dda.c \
 	src/game/raycast_draw.c src/game/raycast_pixel.c
 OBJ_DIR = obj

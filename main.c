@@ -44,6 +44,12 @@ static int	parse_scene(char **lines, t_scene *scene)
 	return (1);
 }
 
+/*
+ * Caminho do main: valida argumentos, le o arquivo, monta a cena
+ * (config + mapa + jogador) e so entao abre a janela e entra no
+ * loop. O jogador vira gente ANTES da janela: quando o loop
+ * comecar, o update_player ja tem quem mover.
+ */
 int	main(int ac, char **av)
 {
 	char	**lines;
@@ -62,6 +68,7 @@ int	main(int ac, char **av)
 	}
 	print_heartbeat(&scene);
 	free_lines(lines);
+	init_player(&scene);
 	if (!init_window(&scene))
 	{
 		free_config(&scene.config);

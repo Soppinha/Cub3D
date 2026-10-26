@@ -6,18 +6,22 @@
 /*   By: svaladar <svaladar@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/16 18:54:57 by svaladar          #+#    #+#             */
-/*   Updated: 2026/09/16 20:02:23 by svaladar         ###   ########.fr       */
+/*   Updated: 2026/10/26 20:45:00 by svaladar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-#include <sys/time.h>
 
+/*
+ * Registra os eventos da janela. O X (17), o par tecla-solta
+ * (KeyPress = 2 sobe bandeira, KeyRelease = 3 desce) e o loop.
+ * As mascaras 1L<<0 e 1L<<1 sao os bits do X11 de cada evento.
+ */
 static void	setup_hooks(t_scene *scene)
 {
 	mlx_hook(scene->mlx.win, 17, 1L << 17, close_hook, scene);
-	mlx_hook(scene->mlx.win, 2, 1L << 0, key_hook, scene);
-	mlx_hook(scene->mlx.win, 3, 1L << 1, key_release_hook, scene);
+	mlx_hook(scene->mlx.win, 2, 1L << 0, key_press, scene);
+	mlx_hook(scene->mlx.win, 3, 1L << 1, key_release, scene);
 	mlx_loop_hook(scene->mlx.mlx, render_hook, scene);
 }
 
@@ -34,8 +38,6 @@ static int	init_image(t_scene *scene)
 
 int	init_window(t_scene *scene)
 {
-	struct timeval	tv;
-
 	scene->mlx.mlx = mlx_init();
 	if (!scene->mlx.mlx)
 		return (fail("mlx_init failed"));
@@ -44,9 +46,6 @@ int	init_window(t_scene *scene)
 		return (fail("mlx_new_window failed"));
 	if (!init_image(scene) || !load_textures(scene))
 		return (0);
-	init_player(scene);
-	gettimeofday(&tv, NULL);
-	scene->last_time = tv.tv_sec + tv.tv_usec / 1000000.0;
 	setup_hooks(scene);
 	return (1);
 }

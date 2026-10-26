@@ -29,22 +29,22 @@ static void	init_step(t_ray *ray, t_player *p)
 	if (ray->dir_x < 0)
 	{
 		ray->step_x = -1;
-		ray->side_dist_x = (p->pos_x - ray->map_x) * ray->delta_dist_x;
+		ray->side_dist_x = (p->x - ray->map_x) * ray->delta_dist_x;
 	}
 	else
 	{
 		ray->step_x = 1;
-		ray->side_dist_x = (ray->map_x + 1.0 - p->pos_x) * ray->delta_dist_x;
+		ray->side_dist_x = (ray->map_x + 1.0 - p->x) * ray->delta_dist_x;
 	}
 	if (ray->dir_y < 0)
 	{
 		ray->step_y = -1;
-		ray->side_dist_y = (p->pos_y - ray->map_y) * ray->delta_dist_y;
+		ray->side_dist_y = (p->y - ray->map_y) * ray->delta_dist_y;
 	}
 	else
 	{
 		ray->step_y = 1;
-		ray->side_dist_y = (ray->map_y + 1.0 - p->pos_y) * ray->delta_dist_y;
+		ray->side_dist_y = (ray->map_y + 1.0 - p->y) * ray->delta_dist_y;
 	}
 }
 
@@ -55,12 +55,12 @@ void	init_ray(t_ray *ray, t_scene *scene, int x)
 
 	p = &scene->player;
 	camera_x = 2.0 * x / WIN_W - 1.0;
-	ray->pos_x = p->pos_x;
-	ray->pos_y = p->pos_y;
+	ray->pos_x = p->x;
+	ray->pos_y = p->y;
 	ray->dir_x = p->dir_x + p->plane_x * camera_x;
 	ray->dir_y = p->dir_y + p->plane_y * camera_x;
-	ray->map_x = (int)p->pos_x;
-	ray->map_y = (int)p->pos_y;
+	ray->map_x = (int)p->x;
+	ray->map_y = (int)p->y;
 	init_step(ray, p);
 }
 
