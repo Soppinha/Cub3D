@@ -12,8 +12,10 @@ SRCS = main.c \
 	src/parser/config_textures.c src/parser/config_color.c \
 	src/parser/map.c src/parser/map_charset.c \
 	src/parser/flood.c src/parser/flood_utils.c \
-	src/window/window.c src/hooks/hooks.c src/hooks/keys.c \
-	src/hooks/move.c src/hooks/cleanup.c
+	src/window/window.c src/window/textures.c \
+	src/hooks/hooks.c src/hooks/keys.c src/hooks/move.c src/hooks/cleanup.c \
+	src/game/raycast.c src/game/raycast_dda.c \
+	src/game/raycast_draw.c src/game/raycast_pixel.c
 OBJ_DIR = obj
 OBJS = $(addprefix $(OBJ_DIR)/, $(SRCS:.c=.o))
 

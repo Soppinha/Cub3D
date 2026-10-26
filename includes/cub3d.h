@@ -6,7 +6,7 @@
 /*   By: svaladar <svaladar@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/16 18:54:00 by svaladar          #+#    #+#             */
-/*   Updated: 2026/09/16 19:30:00 by svaladar         ###   ########.fr       */
+/*   Updated: 2026/09/16 20:04:56 by svaladar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,6 +97,8 @@ typedef struct s_img
 	int		bpp;
 	int		line_len;
 	int		endian;
+	int		width;
+	int		height;
 }	t_img;
 
 typedef struct s_mlx
@@ -104,7 +106,31 @@ typedef struct s_mlx
 	void	*mlx;
 	void	*win;
 	t_img	img;
+	t_img	wall_tex[4];
 }	t_mlx;
+
+typedef struct s_ray
+{
+	double	dir_x;
+	double	dir_y;
+	double	pos_x;
+	double	pos_y;
+	double	side_dist_x;
+	double	side_dist_y;
+	double	delta_dist_x;
+	double	delta_dist_y;
+	double	wall_dist;
+	t_img	*tex;
+	int		map_x;
+	int		map_y;
+	int		step_x;
+	int		step_y;
+	int		side;
+	int		tex_x;
+	int		draw_start;
+	int		draw_end;
+	int		line_height;
+}	t_ray;
 
 /*
  * O JOGADOR VIVO: quem anda pelo mapa.
@@ -172,6 +198,17 @@ int		key_press(int keycode, void *param);
 int		key_release(int keycode, void *param);
 int		close_hook(void *param);
 int		render_hook(void *param);
+int		load_textures(t_scene *scene);
+
+void	render_frame(t_scene *scene);
+void	init_ray(t_ray *ray, t_scene *scene, int x);
+void	run_dda(t_ray *ray, t_map *map);
+void	draw_column(t_scene *scene, t_ray *ray, int x);
+
+void	put_pixel(t_img *img, int x, int y, int color);
+int		tex_color(t_img *tex, int tx, int ty);
+int		floor_color(t_scene *scene, int is_floor);
+int		wall_pixel_color(t_ray *ray, int y);
 
 /* --- mecanica (a parte nova): bandeiras + movimento --- */
 void	set_key_flag(int keycode, int value, t_scene *scene);
