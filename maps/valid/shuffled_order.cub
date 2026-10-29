@@ -1,0 +1,22 @@
+
+
+C     30,30,80
+
+EA    ./tex/east.xpm
+
+
+F 100,60,20
+NO	./tex/north.xpm
+
+WE  ./tex/west.xpm
+
+SO ./tex/south.xpm
+
+
+1111111
+1000001
+1000001
+100N001
+1000001
+1000001
+1111111

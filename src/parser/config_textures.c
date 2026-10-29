@@ -15,7 +15,7 @@
 #include <fcntl.h>
 #include <unistd.h>
 
-static int	check_texture(char *path)
+static int	texture_exists(char *path)
 {
 	int	fd;
 
@@ -28,13 +28,13 @@ static int	check_texture(char *path)
 
 int	check_textures(t_config *cfg)
 {
-	if (!check_texture(cfg->tex_n))
+	if (!texture_exists(cfg->tex_n))
 		return (fail("missing texture: NO"));
-	if (!check_texture(cfg->tex_s))
+	if (!texture_exists(cfg->tex_s))
 		return (fail("missing texture: SO"));
-	if (!check_texture(cfg->tex_w))
+	if (!texture_exists(cfg->tex_w))
 		return (fail("missing texture: WE"));
-	if (!check_texture(cfg->tex_e))
+	if (!texture_exists(cfg->tex_e))
 		return (fail("missing texture: EA"));
 	return (1);
 }

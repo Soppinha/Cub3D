@@ -12,17 +12,13 @@
 
 #include "cub3d.h"
 
-/*
- * Registra os eventos da janela. O X (17), o par tecla-solta
- * (KeyPress = 2 sobe bandeira, KeyRelease = 3 desce) e o loop.
- * As mascaras 1L<<0 e 1L<<1 sao os bits do X11 de cada evento.
- */
 static void	setup_hooks(t_scene *scene)
 {
 	mlx_hook(scene->mlx.win, 17, 1L << 17, close_hook, scene);
 	mlx_hook(scene->mlx.win, 2, 1L << 0, key_press, scene);
 	mlx_hook(scene->mlx.win, 3, 1L << 1, key_release, scene);
 	mlx_loop_hook(scene->mlx.mlx, render_hook, scene);
+	init_mouse(scene);
 }
 
 static int	init_image(t_scene *scene)

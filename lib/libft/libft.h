@@ -10,12 +10,12 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef  LIBFT_H
+#ifndef LIBFT_H
 # define LIBFT_H
 
-# include<stdlib.h>
-# include<unistd.h>
-# include<stdarg.h>
+# include <stdlib.h>
+# include <unistd.h>
+# include <stdarg.h>
 
 typedef struct s_list
 {
@@ -87,13 +87,13 @@ unsigned int	ft_strlcat(char	*dest, const char	*src, unsigned int size);
 #  define FD_MAX 1024
 # endif
 
-char *get_next_line(int fd);
-size_t ft_strlen_gnl(const char *s);
-char *ft_strchr_gnl(const char *s, int c);
-char *ft_strdup_gnl(const char *s);
-char *ft_strjoin_gnl(char *s1, char *s2);
-char *st_substr_gnl(char *s, unsigned int start, size_t len);
-void *ft_memcpy_gnl(void *dest, const void *src, size_t n);
-void *ft_memmove_gnl(void *dest, const void *src, size_t n);
+char			*get_next_line(int fd);
+size_t			ft_strlen_gnl(const char *s);
+char			*ft_strchr_gnl(const char *s, int c);
+char			*ft_strdup_gnl(const char *s);
+char			*ft_strjoin_gnl(char *s1, char *s2);
+char			*st_substr_gnl(char *s, unsigned int start, size_t len);
+void			*ft_memcpy_gnl(void *dest, const void *src, size_t n);
+void			*ft_memmove_gnl(void *dest, const void *src, size_t n);
 
 #endif

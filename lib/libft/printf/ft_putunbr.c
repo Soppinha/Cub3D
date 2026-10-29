@@ -1,19 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_isspace.c                                       :+:      :+:    :+:   */
+/*   ft_putunbr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lcosta-a <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: lcosta-a <lcosta-a@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/12/23 18:01:30 by lcosta-a          #+#    #+#             */
-/*   Updated: 2025/12/23 18:03:08 by lcosta-a         ###   ########.fr       */
+/*   Created: 2025/07/19 22:59:51 by lcosta-a          #+#    #+#             */
+/*   Updated: 2025/08/13 17:08:06 by lcosta-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	ft_isspace(int c)
+int	ft_putunbr(unsigned int n)
 {
-	return (c == ' ' || c == '\t' || c == '\n'
-		|| c == '\v' || c == '\f' || c == '\r');
+	if (n >= 10)
+		return (ft_putunbr(n / 10) + ft_putchar("0123456789"[n % 10]));
+	else
+		return (ft_putchar("0123456789"[n % 10]));
 }

@@ -10,23 +10,6 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-/*
- * AS BANDEIRAS (a parte 1 da mecanica).
- *
- * O mlx_key_hook antigo era um SININHO: toca uma vez quando a tecla
- * desce, e pronto. Pra andar segurando a tecla, a gente troca o
- * sininho por BANDEIRAS:
- *
- *   key_press  -> bandeira SOBE   (keys[IDX_W] = 1)
- *   key_release-> bandeira DESCE  (keys[IDX_W] = 0)
- *   o render_hook (60x por segundo) olha as bandeiras e anda.
- *
- * Nao sao "muitos eventos": sao DOIS eventos por tecla (apertou,
- * soltou) e um ESTADO que fica de pe entre eles. O movimento
- * continuo nasce do loop consumindo a bandeira, nao do teclado
- * gritando.
- */
-
 #include "cub3d.h"
 
 static int	key_index(int keycode)
@@ -46,7 +29,6 @@ static int	key_index(int keycode)
 	return (-1);
 }
 
-/* Sobe (value = 1) ou desce (value = 0) a bandeira de uma tecla. */
 void	set_key_flag(int keycode, int value, t_scene *scene)
 {
 	int	idx;
@@ -56,10 +38,6 @@ void	set_key_flag(int keycode, int value, t_scene *scene)
 		scene->player.keys[idx] = value;
 }
 
-/*
- * BANDEIRA SOBE: a X11 avisa UMA vez que a tecla desceu.
- * (Aqui tambem mora o ESC, que e pressao unica mesmo.)
- */
 int	key_press(int keycode, void *param)
 {
 	t_scene	*scene;
@@ -71,10 +49,6 @@ int	key_press(int keycode, void *param)
 	return (0);
 }
 
-/*
- * BANDEIRA DESCE: a X11 avisa que a tecla foi soltada.
- * Sem isso, o jogador andaria pra sempre (tecla fantasma).
- */
 int	key_release(int keycode, void *param)
 {
 	set_key_flag(keycode, 0, (t_scene *)param);

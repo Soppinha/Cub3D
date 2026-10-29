@@ -12,7 +12,7 @@
 
 #include "cub3d.h"
 
-static int	load_one(t_scene *scene, char *path, t_img *img)
+static int	load_texture(t_scene *scene, char *path, t_img *img)
 {
 	img->ptr = mlx_xpm_file_to_image(scene->mlx.mlx, path,
 			&img->width, &img->height);
@@ -25,13 +25,13 @@ static int	load_one(t_scene *scene, char *path, t_img *img)
 
 int	load_textures(t_scene *scene)
 {
-	if (!load_one(scene, scene->config.tex_n, &scene->mlx.wall_tex[DIR_N]))
+	if (!load_texture(scene, scene->config.tex_n, &scene->mlx.wall_tex[DIR_N]))
 		return (0);
-	if (!load_one(scene, scene->config.tex_s, &scene->mlx.wall_tex[DIR_S]))
+	if (!load_texture(scene, scene->config.tex_s, &scene->mlx.wall_tex[DIR_S]))
 		return (0);
-	if (!load_one(scene, scene->config.tex_e, &scene->mlx.wall_tex[DIR_E]))
+	if (!load_texture(scene, scene->config.tex_e, &scene->mlx.wall_tex[DIR_E]))
 		return (0);
-	if (!load_one(scene, scene->config.tex_w, &scene->mlx.wall_tex[DIR_W]))
+	if (!load_texture(scene, scene->config.tex_w, &scene->mlx.wall_tex[DIR_W]))
 		return (0);
 	return (1);
 }

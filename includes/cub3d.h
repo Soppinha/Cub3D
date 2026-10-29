@@ -20,7 +20,6 @@
 # define WIN_H	720
 # define KEY_ESC	65307
 
-/* --- key inputs (keysyms X11, mesma familia do KEY_ESC) --- */
 # define KEY_W		119
 # define KEY_A		97
 # define KEY_S		115
@@ -28,11 +27,6 @@
 # define KEY_LEFT	65361
 # define KEY_RIGHT	65363
 
-/*
- * Traduzimos o keycode da X11 pra um indice pequeno (0 a 5),
- * porque o keycode das SETAS (65361...) e maior que 256.
- * Assim keys[] so guarda as teclas que importam pro jogo.
- */
 # define IDX_W		0
 # define IDX_A		1
 # define IDX_S		2
@@ -41,16 +35,16 @@
 # define IDX_RIGHT	5
 # define KEY_COUNT	6
 
-/* --- o passo do jogador: a "velocidade" da mecanica --- */
-# define MOVE_SPEED	0.12	/* celulas por frame (frame = 1 volta do loop) */
-# define ROT_SPEED	0.08	/* radios girados por frame */
-# define MOUSE_SENS	0.002	/* bonus: mouse look */
+# define MOVE_SPEED	3.0
+# define ROT_SPEED	2.5
+# define MAX_DT		0.05
+# define MOUSE_SENS	0.002
 
-/* --- o FOV e a constante do circo --- */
-# define PLANE_LEN	0.66	/* FOV de ~66 graus: a "tela de lado" */
+# define PLANE_LEN	0.66
 # define PI		3.14159265358979323846
 
 # include <math.h>
+# include <sys/time.h>
 
 typedef enum e_dir
 {
@@ -132,22 +126,20 @@ typedef struct s_ray
 	int		line_height;
 }	t_ray;
 
-/*
- * O JOGADOR VIVO: quem anda pelo mapa.
- * O t_map guarda o player em INTEIROS (a celula onde nasceu).
- * O t_player guarda a posicao REAL, em double, pra andar suave.
- */
 typedef struct s_player
 {
 	double	x;
 	double	y;
-	double	angle;		/* pra onde a camera olha (em radios) */
-	double	dir_x;		/* vetor direcao: o raycasting consome */
+	double	angle;
+	double	dir_x;
 	double	dir_y;
-	double	plane_x;	/* vetor camera (FOV): o raycasting consome */
+	double	plane_x;
 	double	plane_y;
 	int		keys[KEY_COUNT];
-	int		mouse_dx;	/* delta X do mouse (porta pro bonus futuro) */
+	int		mouse_dx;
+	int		mouse_x;
+	int		mouse_warp;
+	double	last_time;
 }	t_player;
 
 typedef struct s_scene
@@ -178,6 +170,7 @@ int		check_closed(t_map *map);
 int		check_textures(t_config *cfg);
 char	padded_cell(t_map *map, int y, int x);
 int		is_walkable(char c);
+int		touches_void(t_map *map);
 
 int		validate_charset(char *line);
 int		find_player(char *line, int y, t_map *map);
@@ -210,9 +203,10 @@ int		tex_color(t_img *tex, int tx, int ty);
 int		floor_color(t_scene *scene, int is_floor);
 int		wall_pixel_color(t_ray *ray, int y);
 
-/* --- mecanica (a parte nova): bandeiras + movimento --- */
 void	set_key_flag(int keycode, int value, t_scene *scene);
 void	init_player(t_scene *scene);
-void	update_player(t_scene *scene);
+void	update_player(t_scene *scene, double dt);
+int		can_stand(t_scene *scene, double x, double y);
+void	init_mouse(t_scene *scene);
 
 #endif

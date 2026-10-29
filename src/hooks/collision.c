@@ -1,21 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putunbr.c                                       :+:      :+:    :+:   */
+/*   collision.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lcosta-a <lcosta-a@student.42.fr>          +#+  +:+       +#+        */
+/*   By: svaladar <svaladar@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/19 22:59:51 by lcosta-a          #+#    #+#             */
-/*   Updated: 2025/08/13 17:08:06 by lcosta-a         ###   ########.fr       */
+/*   Created: 2026/10/29 12:00:00 by svaladar          #+#    #+#             */
+/*   Updated: 2026/10/29 12:00:00 by svaladar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "cub3d.h"
 
-int	ft_putunbr(unsigned int n)
-{	
-	if (n >= 10)
-		return (ft_putunbr(n / 10) + ft_putchar("0123456789"[n % 10]));
-	else
-		return (ft_putchar("0123456789"[n % 10]));
+int	can_stand(t_scene *scene, double x, double y)
+{
+	if (y < 0 || y >= scene->map.height || x < 0)
+		return (0);
+	return (x < (double)ft_strlen(scene->map.grid[(int)y]));
 }
