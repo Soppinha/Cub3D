@@ -1,31 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strncpy.c                                       :+:      :+:    :+:   */
+/*   mouse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lcosta-a <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: svaladar <svaladar@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/12/06 05:29:29 by lcosta-a          #+#    #+#             */
-/*   Updated: 2025/12/06 05:31:15 by lcosta-a         ###   ########.fr       */
+/*   Created: 2026/10/29 19:00:00 by svaladar          #+#    #+#             */
+/*   Updated: 2026/10/29 19:00:00 by svaladar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <libft.h>
+#include "cub3d.h"
 
-char	*ft_strncpy(char *dest, const char *src, size_t n)
+void	init_mouse(t_scene *scene)
 {
-	size_t	i;
-
-	i = 0;
-	while (i < n && src[i] != '\0')
-	{
-		dest[i] = src[i];
-		i++;
-	}
-	while (i < n)
-	{
-		dest[i] = '\0';
-		i++;
-	}
-	return (dest);
+	(void)scene;
 }

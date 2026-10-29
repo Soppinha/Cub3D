@@ -13,22 +13,6 @@
 #include "cub3d.h"
 #include "libft.h"
 
-static void	print_heartbeat(t_scene *scene)
-{
-	int	y;
-
-	y = 0;
-	while (scene->map.grid[y])
-	{
-		ft_putstr_fd(scene->map.grid[y], 1);
-		ft_putstr_fd("\n", 1);
-		y++;
-	}
-	ft_printf("player at (%d, %d) facing %d | grid %dx%d\n",
-		scene->map.player_x, scene->map.player_y,
-		scene->map.player_dir, scene->map.width, scene->map.height);
-}
-
 static int	parse_scene(char **lines, t_scene *scene)
 {
 	int	map_start;
@@ -44,12 +28,6 @@ static int	parse_scene(char **lines, t_scene *scene)
 	return (1);
 }
 
-/*
- * Caminho do main: valida argumentos, le o arquivo, monta a cena
- * (config + mapa + jogador) e so entao abre a janela e entra no
- * loop. O jogador vira gente ANTES da janela: quando o loop
- * comecar, o update_player ja tem quem mover.
- */
 int	main(int ac, char **av)
 {
 	char	**lines;
@@ -66,15 +44,10 @@ int	main(int ac, char **av)
 		free_lines(lines);
 		return (1);
 	}
-	print_heartbeat(&scene);
 	free_lines(lines);
 	init_player(&scene);
 	if (!init_window(&scene))
-	{
-		free_config(&scene.config);
-		free_map(&scene.map);
-		return (1);
-	}
+		return (cleanup(&scene, 1));
 	mlx_loop(scene.mlx.mlx);
 	return (0);
 }
