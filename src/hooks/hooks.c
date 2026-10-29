@@ -10,18 +10,15 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-/*
- * Os hooks que o LOOP chama.
- *
- * key_press / key_release: moram no keys.c (as bandeiras).
- * close_hook: o X da janela.
- * render_hook: o coracao do jogo. A cada volta do mlx_loop:
- *   1. update_player() -> le as bandeiras, gira, anda (move.c)
- *   2. render_frame() -> o raycasting pinta a imagem
- *   3. put_image -> joga o frame na tela
- */
-
 #include "cub3d.h"
+
+static double	now_sec(void)
+{
+	struct timeval	tv;
+
+	gettimeofday(&tv, NULL);
+	return (tv.tv_sec + tv.tv_usec / 1000000.0);
+}
 
 int	close_hook(void *param)
 {
@@ -31,9 +28,18 @@ int	close_hook(void *param)
 int	render_hook(void *param)
 {
 	t_scene	*scene;
+	double	now;
+	double	dt;
 
 	scene = (t_scene *)param;
-	update_player(scene);
+	now = now_sec();
+	dt = 0;
+	if (scene->player.last_time > 0)
+		dt = now - scene->player.last_time;
+	if (dt > MAX_DT)
+		dt = MAX_DT;
+	scene->player.last_time = now;
+	update_player(scene, dt);
 	render_frame(scene);
 	mlx_put_image_to_window(scene->mlx.mlx, scene->mlx.win,
 		scene->mlx.img.ptr, 0, 0);

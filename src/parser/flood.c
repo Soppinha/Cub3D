@@ -84,7 +84,7 @@ int	check_closed(t_map *map)
 		return (fail("malloc failed"));
 	ok = bfs_run(&b, map);
 	bfs_free(&b);
-	if (!ok)
+	if (!ok || touches_void(map))
 		return (fail("map is not closed"));
 	return (1);
 }

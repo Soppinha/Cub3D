@@ -61,6 +61,7 @@ void	init_ray(t_ray *ray, t_scene *scene, int x)
 	ray->dir_y = p->dir_y + p->plane_y * camera_x;
 	ray->map_x = (int)p->x;
 	ray->map_y = (int)p->y;
+	ray->side = 0;
 	init_step(ray, p);
 }
 
