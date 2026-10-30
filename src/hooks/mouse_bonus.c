@@ -69,6 +69,7 @@ void	init_mouse(t_scene *scene)
 {
 	scene->player.mouse_x = -1;
 	scene->player.mouse_warp = 0;
+	mlx_mouse_hide(scene->mlx.mlx, scene->mlx.win);
 	mlx_hook(scene->mlx.win, 6, 1L << 6, mouse_move, scene);
 	mlx_hook(scene->mlx.win, 8, 1L << 5, mouse_leave, scene);
 }
